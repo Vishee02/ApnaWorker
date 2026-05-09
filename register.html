@@ -44,7 +44,7 @@
           <span>I'm a Client</span>
           <small>Hire professionals</small>
         </div>
-        <div class="role-option glass-card" data-role="freelancer" onclick="selectRole('freelancer', this)">
+          <div class="role-option glass-card" data-role="worker" onclick="selectRole('worker', this)">
           <i class="fa-solid fa-briefcase"></i>
           <span>I'm a Professional</span>
           <small>Offer services</small>
@@ -130,6 +130,7 @@
     </div>
   </div>
 
+  <script src="js/api.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/darkmode.js"></script>
@@ -137,7 +138,7 @@
     initAuthCanvas('authCanvas');
     // Check URL param for role
     const params = new URLSearchParams(window.location.search);
-    if(params.get('role') === 'freelancer') selectRole('freelancer', document.querySelector('[data-role="freelancer"]'));
+    if(params.get('role') === 'worker') selectRole('worker', document.querySelector('[data-role="worker"]'));
   </script>
 </body>
 </html>
