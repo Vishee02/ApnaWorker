@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book a Service — ApnaWorker</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dark-mode">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span class="logo-text">Apna<span class="gradient-text">Worker</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="freelancer.html" class="nav-link">Find Workers</a></li>
+        <li><a href="booking.html" class="nav-link active">Bookings</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="chat.html" class="nav-link">Chat</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="dark-mode-toggle" id="darkModeToggle"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Book a <span class="gradient-text">Service</span></h1>
+      <p class="page-subtitle">Quick, easy, and confirmed in seconds</p>
+    </div>
+  </div>
+
+  <div class="booking-page container">
+    <!-- BOOKING STEPS -->
+    <div class="booking-steps">
+      <div class="booking-step active" id="step1Indicator">
+        <div class="step-circle">1</div>
+        <span>Service</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="booking-step" id="step2Indicator">
+        <div class="step-circle">2</div>
+        <span>Schedule</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="booking-step" id="step3Indicator">
+        <div class="step-circle">3</div>
+        <span>Details</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="booking-step" id="step4Indicator">
+        <div class="step-circle">4</div>
+        <span>Confirm</span>
+      </div>
+    </div>
+
+    <div class="booking-layout">
+      <!-- BOOKING FORM -->
+      <div class="booking-form-wrap">
+
+        <!-- STEP 1: Service -->
+        <div class="booking-step-panel glass-card active" id="bookingStep1">
+          <h3 class="step-panel-title"><i class="fa-solid fa-toolbox gradient-text"></i> Choose Service</h3>
+          <div class="service-options" id="serviceOptions">
+            <!-- JS injected -->
+          </div>
+          <div class="form-group">
+            <label class="form-label">Describe your requirement</label>
+            <textarea id="serviceDesc" class="form-input form-textarea" placeholder="E.g. I need an electrician to fix my switchboard and replace 3 ceiling fans..." rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-location-dot input-icon"></i>
+              <input type="text" id="bookingLocation" class="form-input" placeholder="Enter your address or area"/>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="nextStep(2)">Continue <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- STEP 2: Schedule -->
+        <div class="booking-step-panel glass-card" id="bookingStep2">
+          <h3 class="step-panel-title"><i class="fa-solid fa-calendar gradient-text"></i> Pick Date & Time</h3>
+          <div class="form-group">
+            <label class="form-label">Preferred Date</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-calendar input-icon"></i>
+              <input type="date" id="bookingDate" class="form-input" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Preferred Time</label>
+            <div class="time-slots" id="timeSlots">
+              <button class="time-slot glass-card" onclick="selectTimeSlot(this)">9:00 AM</button>
+              <button class="time-slot glass-card" onclick="selectTimeSlot(this)">10:00 AM</button>
+              <button class="time-slot glass-card" onclick="selectTimeSlot(this)">11:00 AM</button>
+              <button class="time-slot glass-card" onclick="selectTimeSlot(this)">12:00 PM</button>
+              <button class="time-slot glass-card" onclick="selectTimeSlot(this)">2:00 PM</button>
+              <button class="time-slot glass-card" onclick="selectTimeSlot(this)">3:00 PM</button>
+              <button class="time-slot glass-card" onclick="selectTimeSlot(this)">4:00 PM</button>
+              <button class="time-slot glass-card" onclick="selectTimeSlot(this)">5:00 PM</button>
+            </div>
+          </div>
+          <div class="step-nav">
+            <button class="btn btn-outline" onclick="nextStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="btn btn-primary" onclick="nextStep(3)">Continue <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Personal Details -->
+        <div class="booking-step-panel glass-card" id="bookingStep3">
+          <h3 class="step-panel-title"><i class="fa-solid fa-user gradient-text"></i> Your Details</h3>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-user input-icon"></i>
+                <input type="text" id="clientName" class="form-input" placeholder="Your full name"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-phone input-icon"></i>
+                <input type="tel" id="clientPhone" class="form-input" placeholder="+91 98765 43210"/>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input type="email" id="clientEmail" class="form-input" placeholder="your@email.com"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Additional Notes (optional)</label>
+            <textarea id="clientNotes" class="form-input form-textarea" placeholder="Any special instructions..." rows="3"></textarea>
+          </div>
+          <div class="step-nav">
+            <button class="btn btn-outline" onclick="nextStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="btn btn-primary" onclick="nextStep(4)">Review Booking <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Confirm -->
+        <div class="booking-step-panel glass-card" id="bookingStep4">
+          <h3 class="step-panel-title"><i class="fa-solid fa-clipboard-check gradient-text"></i> Review & Confirm</h3>
+          <div class="booking-summary" id="bookingSummary">
+            <!-- JS injected -->
+          </div>
+          <div class="step-nav">
+            <button class="btn btn-outline" onclick="nextStep(3)"><i class="fa-solid fa-arrow-left"></i> Edit</button>
+            <button class="btn btn-primary" onclick="confirmBooking()">
+              <i class="fa-solid fa-check"></i> Confirm Booking
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOOKING SIDEBAR -->
+      <aside class="booking-sidebar">
+        <div class="selected-worker glass-card" id="selectedWorkerCard">
+          <h4>Selected Professional</h4>
+          <div class="mini-worker-card">
+            <div class="mini-avatar" id="miniAvatar">?</div>
+            <div>
+              <strong id="miniWorkerName">Not selected</strong>
+              <p id="miniWorkerSkill">Choose from list</p>
+            </div>
+          </div>
+        </div>
+        <div class="price-breakdown glass-card" id="priceBreakdown">
+          <h4>Price Estimate</h4>
+          <div class="price-row">
+            <span>Service fee</span>
+            <span id="priceService">₹0</span>
+          </div>
+          <div class="price-row">
+            <span>Platform fee (5%)</span>
+            <span id="pricePlatform">₹0</span>
+          </div>
+          <div class="price-divider"></div>
+          <div class="price-row price-total">
+            <span>Total</span>
+            <span id="priceTotal" class="gradient-text">₹0</span>
+          </div>
+          <p class="price-note"><i class="fa-solid fa-info-circle"></i> Final price discussed with professional</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal" style="display:none;">
+    <div class="success-modal glass-card">
+      <div class="success-animation">
+        <div class="checkmark-circle">
+          <i class="fa-solid fa-check checkmark-icon"></i>
+        </div>
+      </div>
+      <h2 class="gradient-text">Booking Confirmed!</h2>
+      <p>Your booking has been confirmed. The professional will contact you shortly.</p>
+      <div class="booking-id">Booking ID: <strong id="bookingIdDisplay"></strong></div>
+      <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+        <a href="dashboard.html" class="btn btn-primary">View Dashboard</a>
+        <a href="chat.html" class="btn btn-outline">Chat with Pro</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/booking.js"></script>
+  <script src="js/darkmode.js"></script>
+</body>
+</html>

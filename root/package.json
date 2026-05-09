@@ -1,0 +1,14 @@
+{
+  "name": "apnaworker",
+  "version": "1.0.0",
+  "description": "ApnaWorker — Modern Hyperlocal Freelance Marketplace",
+  "scripts": {
+    "start":     "cd backend && node server.js",
+    "dev":       "cd backend && nodemon server.js",
+    "install:backend": "cd backend && npm install",
+    "setup":     "cd backend && npm install && cp .env.example .env"
+  },
+  "keywords": ["marketplace","freelance","hyperlocal","nodejs","mongodb"],
+  "author": "ApnaWorker Team",
+  "license": "MIT"
+}

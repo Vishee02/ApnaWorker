@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register — ApnaWorker</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dark-mode auth-page">
+
+  <canvas id="authCanvas"></canvas>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span class="logo-text">Apna<span class="gradient-text">Worker</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="dark-mode-toggle" id="darkModeToggle"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="auth-wrapper">
+    <div class="auth-card glass-card" style="max-width:560px;">
+      <div class="auth-header">
+        <div class="auth-icon-wrap">
+          <i class="fa-solid fa-rocket gradient-text"></i>
+        </div>
+        <h2>Create Account</h2>
+        <p>Join thousands of professionals on ApnaWorker</p>
+      </div>
+
+      <!-- Role Selector -->
+      <div class="role-selector">
+        <div class="role-option active glass-card" data-role="client" onclick="selectRole('client', this)">
+          <i class="fa-solid fa-user"></i>
+          <span>I'm a Client</span>
+          <small>Hire professionals</small>
+        </div>
+        <div class="role-option glass-card" data-role="freelancer" onclick="selectRole('freelancer', this)">
+          <i class="fa-solid fa-briefcase"></i>
+          <span>I'm a Professional</span>
+          <small>Offer services</small>
+        </div>
+      </div>
+
+      <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input type="text" id="firstName" class="form-input" placeholder="First name" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input type="text" id="lastName" class="form-input" placeholder="Last name" required/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-envelope input-icon"></i>
+            <input type="email" id="regEmail" class="form-input" placeholder="you@example.com" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-phone input-icon"></i>
+            <input type="tel" id="phone" class="form-input" placeholder="+91 98765 43210" required/>
+          </div>
+        </div>
+        <div class="form-group" id="skillGroup" style="display:none;">
+          <label class="form-label">Your Skill / Profession</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-tools input-icon"></i>
+            <select id="skill" class="form-input form-select">
+              <option value="">Select your skill</option>
+              <option value="electrician">Electrician</option>
+              <option value="plumber">Plumber</option>
+              <option value="painter">Painter</option>
+              <option value="developer">Web Developer</option>
+              <option value="designer">UI/UX Designer</option>
+              <option value="carpenter">Carpenter</option>
+              <option value="mechanic">Mechanic</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="regPassword" class="form-input" placeholder="Create a strong password" required/>
+            <button type="button" class="toggle-password" onclick="togglePassword('regPassword', this)">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+          <div class="password-strength" id="passwordStrength">
+            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+            <span id="strengthText">Password strength</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="checkbox-label" style="gap:10px;font-size:0.85rem;">
+            <input type="checkbox" required/> 
+            I agree to the <a href="#" class="gradient-text">Terms of Service</a> and <a href="#" class="gradient-text">Privacy Policy</a>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">
+          Create My Account <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <div class="auth-footer-text">
+        Already have an account? <a href="login.html" class="gradient-text">Sign in</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script>
+    initAuthCanvas('authCanvas');
+    // Check URL param for role
+    const params = new URLSearchParams(window.location.search);
+    if(params.get('role') === 'freelancer') selectRole('freelancer', document.querySelector('[data-role="freelancer"]'));
+  </script>
+</body>
+</html>

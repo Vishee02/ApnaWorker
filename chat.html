@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat — ApnaWorker</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <link rel="stylesheet" href="css/chat.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dark-mode">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span class="logo-text">Apna<span class="gradient-text">Worker</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="freelancer.html" class="nav-link">Find Workers</a></li>
+        <li><a href="booking.html" class="nav-link">Bookings</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="chat.html" class="nav-link active">Chat</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="dark-mode-toggle" id="darkModeToggle"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="chat-page">
+
+    <!-- CONVERSATIONS LIST -->
+    <aside class="chat-sidebar glass-card">
+      <div class="chat-sidebar-header">
+        <h3>Messages</h3>
+        <button class="icon-btn" title="New Chat"><i class="fa-solid fa-pen-to-square"></i></button>
+      </div>
+      <div class="chat-search">
+        <div class="input-wrapper">
+          <i class="fa-solid fa-magnifying-glass input-icon"></i>
+          <input type="text" class="form-input" placeholder="Search conversations..." oninput="filterConversations(this.value)"/>
+        </div>
+      </div>
+      <div class="conversations-list" id="conversationsList">
+        <!-- JS injected -->
+      </div>
+    </aside>
+
+    <!-- CHAT WINDOW -->
+    <div class="chat-window">
+      <!-- Chat Header -->
+      <div class="chat-header glass-card" id="chatHeader">
+        <div class="chat-user-info" id="chatUserInfo">
+          <div class="chat-avatar gradient-bg" id="chatAvatarHeader">R</div>
+          <div>
+            <strong id="chatUserName">Rajesh Kumar</strong>
+            <span class="online-status" id="onlineStatus"><span class="online-dot"></span> Online</span>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button class="icon-btn" title="Voice Call"><i class="fa-solid fa-phone"></i></button>
+          <button class="icon-btn" title="Video Call"><i class="fa-solid fa-video"></i></button>
+          <button class="icon-btn" title="More Options"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="chat-messages" id="chatMessages">
+        <!-- JS injected -->
+      </div>
+
+      <!-- Message Input -->
+      <div class="chat-input-bar glass-card">
+        <button class="icon-btn" title="Attach File" onclick="document.getElementById('fileInput').click()">
+          <i class="fa-solid fa-paperclip"></i>
+        </button>
+        <input type="file" id="fileInput" style="display:none;" onchange="handleFileAttachment(this)"/>
+        <button class="icon-btn" title="Emoji"><i class="fa-regular fa-face-smile"></i></button>
+        <input type="text" id="messageInput" class="chat-text-input" placeholder="Type a message..."
+          onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); sendMessage(); }"/>
+        <button class="btn btn-primary chat-send-btn" onclick="sendMessage()">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- BOOKING QUICK PANEL -->
+    <aside class="chat-info-panel glass-card" id="chatInfoPanel">
+      <div class="info-panel-header">
+        <h4>Quick Actions</h4>
+      </div>
+      <div class="info-panel-avatar">
+        <div class="large-avatar gradient-bg" id="infoPanelAvatar">R</div>
+        <strong id="infoPanelName">Rajesh Kumar</strong>
+        <span class="badge badge-verified"><i class="fa-solid fa-shield-halved"></i> Verified</span>
+      </div>
+      <div class="quick-actions">
+        <a href="booking.html" class="quick-action-btn glass-card">
+          <i class="fa-solid fa-calendar-plus gradient-text"></i>
+          <span>Book Now</span>
+        </a>
+        <button class="quick-action-btn glass-card" onclick="shareLocation()">
+          <i class="fa-solid fa-location-dot gradient-text"></i>
+          <span>Share Location</span>
+        </button>
+        <button class="quick-action-btn glass-card" onclick="sendFile()">
+          <i class="fa-solid fa-file gradient-text"></i>
+          <span>Send File</span>
+        </button>
+        <button class="quick-action-btn glass-card" onclick="blockUser()">
+          <i class="fa-solid fa-ban" style="color:#ef4444;"></i>
+          <span>Block</span>
+        </button>
+      </div>
+      <div class="chat-booking-status glass-card">
+        <h5>Active Booking</h5>
+        <div class="mini-booking">
+          <i class="fa-solid fa-bolt gradient-text"></i>
+          <div>
+            <strong>Electrical Repair</strong>
+            <span>Dec 20, 2024 · 10 AM</span>
+          </div>
+        </div>
+        <span class="status-badge pending">Upcoming</span>
+      </div>
+    </aside>
+
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/darkmode.js"></script>
+</body>
+</html>

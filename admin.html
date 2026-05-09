@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — ApnaWorker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body class="dark-mode">
+
+<!-- LOGIN SCREEN -->
+<div id="adminLoginScreen" class="admin-login-screen">
+  <div class="admin-login-card">
+    <div class="admin-login-logo">
+      <i class="fa-solid fa-bolt"></i>
+      <span>Apna<span class="grad">Worker</span></span>
+    </div>
+    <h2>Admin Portal</h2>
+    <p>Restricted access. Authorised personnel only.</p>
+    <div class="aform-group">
+      <label>Email</label>
+      <input type="email" id="adminEmail" class="ainput" placeholder="admin@apnaworker.com" value="admin@apnaworker.com"/>
+    </div>
+    <div class="aform-group">
+      <label>Password</label>
+      <input type="password" id="adminPassword" class="ainput" placeholder="••••••••" value="admin123"/>
+    </div>
+    <div id="loginError" class="login-error" style="display:none;"></div>
+    <button class="abtn abtn-primary" onclick="adminLogin()">
+      <i class="fa-solid fa-shield-halved"></i> Access Admin Panel
+    </button>
+    <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Website</a>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-logo">
+      <i class="fa-solid fa-bolt"></i>
+      <span>Apna<span class="grad">Worker</span></span>
+    </div>
+    <div class="sidebar-admin-info">
+      <div class="sidebar-avatar">A</div>
+      <div>
+        <strong>Super Admin</strong>
+        <span>admin@apnaworker.com</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">MAIN</div>
+      <a class="sidebar-link active" onclick="showSection('overview',this)"><i class="fa-solid fa-chart-pie"></i> Overview</a>
+      <a class="sidebar-link" onclick="showSection('analytics',this)"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+
+      <div class="nav-group-label">MANAGEMENT</div>
+      <a class="sidebar-link" onclick="showSection('users',this)"><i class="fa-solid fa-users"></i> Users</a>
+      <a class="sidebar-link" onclick="showSection('workers',this)"><i class="fa-solid fa-hard-hat"></i> Workers</a>
+      <a class="sidebar-link" onclick="showSection('bookings',this)"><i class="fa-solid fa-calendar-check"></i> Bookings</a>
+      <a class="sidebar-link" onclick="showSection('categories',this)"><i class="fa-solid fa-grip"></i> Categories</a>
+      <a class="sidebar-link" onclick="showSection('services',this)"><i class="fa-solid fa-toolbox"></i> Services</a>
+
+      <div class="nav-group-label">FINANCE</div>
+      <a class="sidebar-link" onclick="showSection('payments',this)"><i class="fa-solid fa-credit-card"></i> Payments</a>
+      <a class="sidebar-link" onclick="showSection('payouts',this)"><i class="fa-solid fa-wallet"></i> Payouts</a>
+      <a class="sidebar-link" onclick="showSection('coupons',this)"><i class="fa-solid fa-ticket"></i> Coupons</a>
+
+      <div class="nav-group-label">CONTENT</div>
+      <a class="sidebar-link" onclick="showSection('reviews',this)"><i class="fa-solid fa-star"></i> Reviews</a>
+      <a class="sidebar-link" onclick="showSection('notifications',this)"><i class="fa-solid fa-bell"></i> Notifications</a>
+      <a class="sidebar-link" onclick="showSection('banners',this)"><i class="fa-solid fa-image"></i> Banners</a>
+      <a class="sidebar-link" onclick="showSection('cms',this)"><i class="fa-solid fa-file-lines"></i> CMS / Blog</a>
+
+      <div class="nav-group-label">SYSTEM</div>
+      <a class="sidebar-link" onclick="showSection('cities',this)"><i class="fa-solid fa-city"></i> Cities</a>
+      <a class="sidebar-link" onclick="showSection('settings',this)"><i class="fa-solid fa-gear"></i> Settings</a>
+      <a class="sidebar-link" onclick="adminLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="admin-main" id="adminMain">
+
+    <!-- TOP BAR -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title" id="topbarTitle">Overview</div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search anything..." oninput="globalSearch(this.value)"/>
+        </div>
+        <button class="topbar-icon-btn" title="Notifications" onclick="showSection('notifications',null)">
+          <i class="fa-solid fa-bell"></i>
+          <span class="notif-dot">5</span>
+        </button>
+        <button class="topbar-icon-btn" title="Visit Site" onclick="window.open('index.html','_blank')">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+        <div class="topbar-avatar" title="Admin">A</div>
+      </div>
+    </header>
+
+    <!-- ── SECTIONS ────────────────────────────────────────────── -->
+
+    <!-- 1. OVERVIEW -->
+    <section id="sec-overview" class="admin-section active">
+      <div class="section-intro">
+        <h2>Welcome back, <span class="grad">Admin</span> 👋</h2>
+        <p>Here's what's happening on ApnaWorker today.</p>
+      </div>
+
+      <div class="stats-grid" id="overviewStats"></div>
+
+      <div class="dash-row">
+        <div class="dash-col-2">
+          <div class="acard">
+            <div class="acard-header">
+              <h3>Revenue (Last 7 Days)</h3>
+              <button class="abtn abtn-sm abtn-outline">Export</button>
+            </div>
+            <canvas id="revenueChart" height="220"></canvas>
+          </div>
+        </div>
+        <div class="dash-col-1">
+          <div class="acard">
+            <div class="acard-header"><h3>Category Distribution</h3></div>
+            <canvas id="categoryChart" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-row">
+        <div class="dash-col-2">
+          <div class="acard">
+            <div class="acard-header">
+              <h3>Recent Bookings</h3>
+              <button class="abtn abtn-sm abtn-primary" onclick="showSection('bookings',null)">View All</button>
+            </div>
+            <div id="recentBookingsTable"></div>
+          </div>
+        </div>
+        <div class="dash-col-1">
+          <div class="acard">
+            <div class="acard-header"><h3>Pending Actions</h3></div>
+            <div id="pendingActions"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ANALYTICS -->
+    <section id="sec-analytics" class="admin-section">
+      <div class="acard">
+        <div class="acard-header"><h3>Platform Analytics</h3>
+          <div style="display:flex;gap:8px;">
+            <button class="abtn abtn-sm abtn-outline" onclick="setAnalyticsPeriod(7,this)">7D</button>
+            <button class="abtn abtn-sm abtn-outline active-period" onclick="setAnalyticsPeriod(30,this)">30D</button>
+            <button class="abtn abtn-sm abtn-outline" onclick="setAnalyticsPeriod(90,this)">90D</button>
+          </div>
+        </div>
+        <div class="stats-grid" id="analyticsStats"></div>
+        <canvas id="analyticsChart" height="280"></canvas>
+      </div>
+    </section>
+
+    <!-- 3. USERS -->
+    <section id="sec-users" class="admin-section">
+      <div class="acard">
+        <div class="acard-header">
+          <h3>User Management <span class="badge-count" id="userCount"></span></h3>
+          <div style="display:flex;gap:8px;">
+            <input type="text" class="asearch" placeholder="Search users..." oninput="filterTable('usersTable',this.value)"/>
+            <button class="abtn abtn-primary abtn-sm" onclick="openModal('addUserModal')"><i class="fa-solid fa-plus"></i> Add User</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="atable" id="usersTable">
+            <thead><tr><th>User</th><th>Email</th><th>Phone</th><th>Role</th><th>Joined</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WORKERS -->
+    <section id="sec-workers" class="admin-section">
+      <div class="acard">
+        <div class="acard-header">
+          <h3>Worker Management <span class="badge-count" id="workerCount"></span></h3>
+          <div style="display:flex;gap:8px;">
+            <input type="text" class="asearch" placeholder="Search workers..." oninput="filterTable('workersTable',this.value)"/>
+            <select class="ainput" style="width:140px;" onchange="filterByApproval(this.value)">
+              <option value="">All Status</option>
+              <option value="approved">Approved</option>
+              <option value="pending">Pending</option>
+              <option value="banned">Banned</option>
+            </select>
+            <button class="abtn abtn-primary abtn-sm" onclick="openModal('addWorkerModal')"><i class="fa-solid fa-plus"></i> Add Worker</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="atable" id="workersTable">
+            <thead><tr><th>Worker</th><th>Skill</th><th>Location</th><th>Rating</th><th>Jobs</th><th>Earnings</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="workersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. BOOKINGS -->
+    <section id="sec-bookings" class="admin-section">
+      <div class="acard">
+        <div class="acard-header">
+          <h3>Booking Management <span class="badge-count" id="bookingCount"></span></h3>
+          <div style="display:flex;gap:8px;">
+            <input type="text" class="asearch" placeholder="Search bookings..." oninput="filterTable('bookingsTable',this.value)"/>
+            <select class="ainput" style="width:140px;" onchange="filterBookingsByStatus(this.value)">
+              <option value="">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="active">Active</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <button class="abtn abtn-outline abtn-sm" onclick="exportTableCSV('bookingsTable','bookings')"><i class="fa-solid fa-download"></i> Export</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="atable" id="bookingsTable">
+            <thead><tr><th>ID</th><th>Client</th><th>Worker</th><th>Service</th><th>Date</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="bookingsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CATEGORIES -->
+    <section id="sec-categories" class="admin-section">
+      <div class="acard-header" style="margin-bottom:20px;">
+        <h3>Category Management</h3>
+        <button class="abtn abtn-primary abtn-sm" onclick="openModal('addCategoryModal')"><i class="fa-solid fa-plus"></i> Add Category</button>
+      </div>
+      <div class="categories-admin-grid" id="categoriesAdminGrid"></div>
+    </section>
+
+    <!-- 7. SERVICES -->
+    <section id="sec-services" class="admin-section">
+      <div class="acard">
+        <div class="acard-header">
+          <h3>Service Management</h3>
+          <button class="abtn abtn-primary abtn-sm" onclick="openModal('addServiceModal')"><i class="fa-solid fa-plus"></i> Add Service</button>
+        </div>
+        <div class="table-wrap">
+          <table class="atable" id="servicesTable">
+            <thead><tr><th>Service</th><th>Category</th><th>Base Price</th><th>Workers</th><th>Bookings</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="servicesTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. PAYMENTS -->
+    <section id="sec-payments" class="admin-section">
+      <div class="stats-grid" id="paymentStats"></div>
+      <div class="acard" style="margin-top:20px;">
+        <div class="acard-header">
+          <h3>Payment Transactions</h3>
+          <button class="abtn abtn-outline abtn-sm" onclick="exportTableCSV('paymentsTable','payments')"><i class="fa-solid fa-download"></i> Export</button>
+        </div>
+        <div class="table-wrap">
+          <table class="atable" id="paymentsTable">
+            <thead><tr><th>TXN ID</th><th>User</th><th>Worker</th><th>Amount</th><th>Method</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody id="paymentsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. PAYOUTS -->
+    <section id="sec-payouts" class="admin-section">
+      <div class="acard">
+        <div class="acard-header"><h3>Payout Requests</h3></div>
+        <div class="table-wrap">
+          <table class="atable" id="payoutsTable">
+            <thead><tr><th>Worker</th><th>Amount</th><th>Bank/UPI</th><th>Requested</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="payoutsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. COUPONS -->
+    <section id="sec-coupons" class="admin-section">
+      <div class="acard">
+        <div class="acard-header">
+          <h3>Coupon Codes</h3>
+          <button class="abtn abtn-primary abtn-sm" onclick="openModal('addCouponModal')"><i class="fa-solid fa-plus"></i> Create Coupon</button>
+        </div>
+        <div class="table-wrap">
+          <table class="atable" id="couponsTable">
+            <thead><tr><th>Code</th><th>Discount</th><th>Type</th><th>Min Order</th><th>Uses</th><th>Expiry</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="couponsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. REVIEWS -->
+    <section id="sec-reviews" class="admin-section">
+      <div class="acard">
+        <div class="acard-header"><h3>Review Moderation</h3></div>
+        <div id="reviewsList"></div>
+      </div>
+    </section>
+
+    <!-- 12. NOTIFICATIONS -->
+    <section id="sec-notifications" class="admin-section">
+      <div class="dash-row">
+        <div class="dash-col-2">
+          <div class="acard">
+            <div class="acard-header"><h3>Send Notification</h3></div>
+            <div class="aform-group">
+              <label>Target Audience</label>
+              <select class="ainput" id="notifTarget">
+                <option value="all">All Users & Workers</option>
+                <option value="users">Users Only</option>
+                <option value="workers">Workers Only</option>
+              </select>
+            </div>
+            <div class="aform-group">
+              <label>Notification Type</label>
+              <select class="ainput" id="notifType">
+                <option value="info">Info</option>
+                <option value="promo">Promotion</option>
+                <option value="alert">Alert</option>
+                <option value="update">Platform Update</option>
+              </select>
+            </div>
+            <div class="aform-group">
+              <label>Title</label>
+              <input class="ainput" id="notifTitle" placeholder="Notification title..."/>
+            </div>
+            <div class="aform-group">
+              <label>Message</label>
+              <textarea class="ainput" id="notifMessage" rows="4" placeholder="Write your message here..."></textarea>
+            </div>
+            <button class="abtn abtn-primary" onclick="sendNotification()"><i class="fa-solid fa-paper-plane"></i> Send Notification</button>
+          </div>
+        </div>
+        <div class="dash-col-1">
+          <div class="acard">
+            <div class="acard-header"><h3>Recent Sent</h3></div>
+            <div id="sentNotifications"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. BANNERS -->
+    <section id="sec-banners" class="admin-section">
+      <div class="acard">
+        <div class="acard-header">
+          <h3>Banner / Advertisement Management</h3>
+          <button class="abtn abtn-primary abtn-sm" onclick="openModal('addBannerModal')"><i class="fa-solid fa-plus"></i> Add Banner</button>
+        </div>
+        <div class="banners-grid" id="bannersGrid"></div>
+      </div>
+    </section>
+
+    <!-- 14. CMS / BLOG -->
+    <section id="sec-cms" class="admin-section">
+      <div class="acard">
+        <div class="acard-header">
+          <h3>CMS / Blog Posts</h3>
+          <button class="abtn abtn-primary abtn-sm" onclick="openModal('addPostModal')"><i class="fa-solid fa-plus"></i> New Post</button>
+        </div>
+        <div class="table-wrap">
+          <table class="atable" id="cmsTable">
+            <thead><tr><th>Title</th><th>Author</th><th>Category</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="cmsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. CITIES -->
+    <section id="sec-cities" class="admin-section">
+      <div class="acard">
+        <div class="acard-header">
+          <h3>City / Location Management</h3>
+          <button class="abtn abtn-primary abtn-sm" onclick="openModal('addCityModal')"><i class="fa-solid fa-plus"></i> Add City</button>
+        </div>
+        <div class="cities-grid" id="citiesGrid"></div>
+      </div>
+    </section>
+
+    <!-- 16. SETTINGS -->
+    <section id="sec-settings" class="admin-section">
+      <div class="settings-tabs">
+        <button class="stab active" onclick="showSettingsTab('general',this)">General</button>
+        <button class="stab" onclick="showSettingsTab('commission',this)">Commission</button>
+        <button class="stab" onclick="showSettingsTab('seo',this)">SEO</button>
+        <button class="stab" onclick="showSettingsTab('email',this)">Email</button>
+        <button class="stab" onclick="showSettingsTab('security',this)">Security</button>
+      </div>
+
+      <div id="stab-general" class="settings-tab-content active">
+        <div class="settings-grid">
+          <div class="acard">
+            <h4 class="settings-title">Platform Settings</h4>
+            <div class="aform-group"><label>Platform Name</label><input class="ainput" value="ApnaWorker"/></div>
+            <div class="aform-group"><label>Support Email</label><input class="ainput" value="support@apnaworker.com"/></div>
+            <div class="aform-group"><label>Support Phone</label><input class="ainput" value="+91 98765 43210"/></div>
+            <div class="aform-group"><label>Default Currency</label>
+              <select class="ainput"><option>INR (₹)</option><option>USD ($)</option></select>
+            </div>
+            <div class="aform-group">
+              <label>Maintenance Mode</label>
+              <label class="toggle-switch"><input type="checkbox" id="maintenanceMode"/><span class="toggle-slider"></span></label>
+            </div>
+            <button class="abtn abtn-primary" onclick="saveSettings('general')"><i class="fa-solid fa-save"></i> Save Settings</button>
+          </div>
+          <div class="acard">
+            <h4 class="settings-title">App Features</h4>
+            <div class="toggle-list">
+              <div class="toggle-item"><span>Enable Chat</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-item"><span>Enable Reviews</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-item"><span>Enable Payments</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-item"><span>Enable Notifications</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-item"><span>Worker Verification Required</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-item"><span>Auto-assign Workers</span><label class="toggle-switch"><input type="checkbox"/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-item"><span>Dark Mode Default</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+              <div class="toggle-item"><span>PWA Enabled</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="stab-commission" class="settings-tab-content">
+        <div class="acard">
+          <h4 class="settings-title">Commission & Pricing</h4>
+          <div class="settings-grid">
+            <div class="aform-group"><label>Platform Commission (%)</label><input class="ainput" type="number" value="10" min="0" max="50"/></div>
+            <div class="aform-group"><label>Tax Rate (GST %)</label><input class="ainput" type="number" value="18" min="0" max="28"/></div>
+            <div class="aform-group"><label>Min Booking Amount (₹)</label><input class="ainput" type="number" value="200"/></div>
+            <div class="aform-group"><label>Max Booking Amount (₹)</label><input class="ainput" type="number" value="50000"/></div>
+            <div class="aform-group"><label>Cancellation Fee (%)</label><input class="ainput" type="number" value="5"/></div>
+            <div class="aform-group"><label>Worker Payout Cycle</label>
+              <select class="ainput"><option>Weekly</option><option>Bi-weekly</option><option>Monthly</option></select>
+            </div>
+          </div>
+          <button class="abtn abtn-primary" onclick="saveSettings('commission')"><i class="fa-solid fa-save"></i> Save Commission Settings</button>
+        </div>
+      </div>
+
+      <div id="stab-seo" class="settings-tab-content">
+        <div class="acard">
+          <h4 class="settings-title">SEO Settings</h4>
+          <div class="aform-group"><label>Meta Title</label><input class="ainput" value="ApnaWorker — Hire Verified Local Professionals"/></div>
+          <div class="aform-group"><label>Meta Description</label><textarea class="ainput" rows="3">Connect with verified electricians, plumbers, developers & more near you. Book instantly on ApnaWorker.</textarea></div>
+          <div class="aform-group"><label>Keywords</label><input class="ainput" value="hire electrician, local plumber, freelancer near me, book worker"/></div>
+          <div class="aform-group"><label>OG Image URL</label><input class="ainput" placeholder="https://..."/></div>
+          <div class="aform-group"><label>Google Analytics ID</label><input class="ainput" placeholder="G-XXXXXXXXXX"/></div>
+          <button class="abtn abtn-primary" onclick="saveSettings('seo')"><i class="fa-solid fa-save"></i> Save SEO Settings</button>
+        </div>
+      </div>
+
+      <div id="stab-email" class="settings-tab-content">
+        <div class="acard">
+          <h4 class="settings-title">Email Configuration</h4>
+          <div class="aform-group"><label>SMTP Host</label><input class="ainput" placeholder="smtp.gmail.com"/></div>
+          <div class="aform-group"><label>SMTP Port</label><input class="ainput" type="number" value="587"/></div>
+          <div class="aform-group"><label>SMTP User</label><input class="ainput" placeholder="your@email.com"/></div>
+          <div class="aform-group"><label>SMTP Password</label><input class="ainput" type="password" placeholder="••••••••"/></div>
+          <div class="aform-group"><label>From Name</label><input class="ainput" value="ApnaWorker"/></div>
+          <button class="abtn abtn-primary" onclick="saveSettings('email')"><i class="fa-solid fa-save"></i> Save & Test Email</button>
+        </div>
+      </div>
+
+      <div id="stab-security" class="settings-tab-content">
+        <div class="acard">
+          <h4 class="settings-title">Security Settings</h4>
+          <div class="aform-group"><label>Change Admin Password</label><input class="ainput" type="password" placeholder="New password"/></div>
+          <div class="aform-group"><label>Confirm Password</label><input class="ainput" type="password" placeholder="Confirm password"/></div>
+          <div class="toggle-list">
+            <div class="toggle-item"><span>Two-Factor Authentication</span><label class="toggle-switch"><input type="checkbox"/><span class="toggle-slider"></span></label></div>
+            <div class="toggle-item"><span>Login Activity Logs</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+            <div class="toggle-item"><span>Rate Limiting</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+            <div class="toggle-item"><span>Fraud Detection</span><label class="toggle-switch"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
+          </div>
+          <button class="abtn abtn-primary" style="margin-top:16px;" onclick="saveSettings('security')"><i class="fa-solid fa-shield"></i> Update Security</button>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /admin-main -->
+</div><!-- /admin-panel -->
+
+<!-- ── MODALS ─────────────────────────────────────────────────────────────── -->
+
+<!-- Add Worker Modal -->
+<div class="amodal-overlay" id="addWorkerModal">
+  <div class="amodal">
+    <div class="amodal-header"><h3>Add New Worker</h3><button onclick="closeModal('addWorkerModal')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="amodal-body">
+      <div class="aform-row2">
+        <div class="aform-group"><label>First Name</label><input class="ainput" id="wFirstName" placeholder="Rajesh"/></div>
+        <div class="aform-group"><label>Last Name</label><input class="ainput" id="wLastName" placeholder="Kumar"/></div>
+      </div>
+      <div class="aform-group"><label>Email</label><input class="ainput" id="wEmail" type="email" placeholder="worker@example.com"/></div>
+      <div class="aform-group"><label>Phone</label><input class="ainput" id="wPhone" placeholder="+91 98765 43210"/></div>
+      <div class="aform-row2">
+        <div class="aform-group"><label>Skill / Category</label>
+          <select class="ainput" id="wSkill">
+            <option>Electrician</option><option>Plumber</option><option>Painter</option>
+            <option>Developer</option><option>Designer</option><option>Carpenter</option><option>Mechanic</option>
+          </select>
+        </div>
+        <div class="aform-group"><label>Hourly Rate (₹)</label><input class="ainput" id="wRate" type="number" placeholder="500"/></div>
+      </div>
+      <div class="aform-group"><label>Location / City</label><input class="ainput" id="wLocation" placeholder="Varanasi, UP"/></div>
+      <div class="aform-group"><label>Bio / Description</label><textarea class="ainput" id="wBio" rows="3" placeholder="Short professional bio..."></textarea></div>
+      <div class="aform-row2">
+        <div class="aform-group"><label>Status</label>
+          <select class="ainput" id="wStatus"><option value="approved">Approved</option><option value="pending">Pending</option></select>
+        </div>
+        <div class="aform-group"><label>Verified</label>
+          <select class="ainput" id="wVerified"><option value="true">Yes</option><option value="false">No</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="amodal-footer">
+      <button class="abtn abtn-outline" onclick="closeModal('addWorkerModal')">Cancel</button>
+      <button class="abtn abtn-primary" onclick="addWorker()"><i class="fa-solid fa-plus"></i> Add Worker</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add User Modal -->
+<div class="amodal-overlay" id="addUserModal">
+  <div class="amodal">
+    <div class="amodal-header"><h3>Add New User</h3><button onclick="closeModal('addUserModal')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="amodal-body">
+      <div class="aform-row2">
+        <div class="aform-group"><label>First Name</label><input class="ainput" id="uFirstName" placeholder="Rahul"/></div>
+        <div class="aform-group"><label>Last Name</label><input class="ainput" id="uLastName" placeholder="Sharma"/></div>
+      </div>
+      <div class="aform-group"><label>Email</label><input class="ainput" id="uEmail" type="email" placeholder="user@example.com"/></div>
+      <div class="aform-group"><label>Phone</label><input class="ainput" id="uPhone" placeholder="+91 98765 43210"/></div>
+      <div class="aform-row2">
+        <div class="aform-group"><label>Role</label>
+          <select class="ainput" id="uRole"><option>client</option><option>admin</option></select>
+        </div>
+        <div class="aform-group"><label>City</label><input class="ainput" id="uCity" placeholder="Varanasi"/></div>
+      </div>
+    </div>
+    <div class="amodal-footer">
+      <button class="abtn abtn-outline" onclick="closeModal('addUserModal')">Cancel</button>
+      <button class="abtn abtn-primary" onclick="addUser()"><i class="fa-solid fa-plus"></i> Add User</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Category Modal -->
+<div class="amodal-overlay" id="addCategoryModal">
+  <div class="amodal">
+    <div class="amodal-header"><h3>Add New Category</h3><button onclick="closeModal('addCategoryModal')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="amodal-body">
+      <div class="aform-group"><label>Category Name</label><input class="ainput" id="catName" placeholder="e.g. Gardener"/></div>
+      <div class="aform-group"><label>Icon (Emoji or FA class)</label><input class="ainput" id="catIcon" placeholder="🌿 or fa-leaf"/></div>
+      <div class="aform-group"><label>Color (hex)</label><input class="ainput" type="color" id="catColor" value="#10b981"/></div>
+      <div class="aform-group"><label>Description</label><textarea class="ainput" id="catDesc" rows="2" placeholder="What services this category covers..."></textarea></div>
+    </div>
+    <div class="amodal-footer">
+      <button class="abtn abtn-outline" onclick="closeModal('addCategoryModal')">Cancel</button>
+      <button class="abtn abtn-primary" onclick="addCategory()"><i class="fa-solid fa-plus"></i> Add Category</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Coupon Modal -->
+<div class="amodal-overlay" id="addCouponModal">
+  <div class="amodal">
+    <div class="amodal-header"><h3>Create Coupon Code</h3><button onclick="closeModal('addCouponModal')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="amodal-body">
+      <div class="aform-group"><label>Coupon Code</label><input class="ainput" id="couponCode" placeholder="SAVE20" style="text-transform:uppercase;"/></div>
+      <div class="aform-row2">
+        <div class="aform-group"><label>Discount Value</label><input class="ainput" id="couponValue" type="number" placeholder="20"/></div>
+        <div class="aform-group"><label>Type</label>
+          <select class="ainput" id="couponType"><option value="percent">Percentage (%)</option><option value="flat">Flat (₹)</option></select>
+        </div>
+      </div>
+      <div class="aform-row2">
+        <div class="aform-group"><label>Min Order (₹)</label><input class="ainput" id="couponMin" type="number" placeholder="500"/></div>
+        <div class="aform-group"><label>Max Uses</label><input class="ainput" id="couponMaxUses" type="number" placeholder="100"/></div>
+      </div>
+      <div class="aform-group"><label>Expiry Date</label><input class="ainput" id="couponExpiry" type="date"/></div>
+    </div>
+    <div class="amodal-footer">
+      <button class="abtn abtn-outline" onclick="closeModal('addCouponModal')">Cancel</button>
+      <button class="abtn abtn-primary" onclick="addCoupon()"><i class="fa-solid fa-ticket"></i> Create Coupon</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add City Modal -->
+<div class="amodal-overlay" id="addCityModal">
+  <div class="amodal">
+    <div class="amodal-header"><h3>Add City</h3><button onclick="closeModal('addCityModal')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="amodal-body">
+      <div class="aform-group"><label>City Name</label><input class="ainput" id="cityName" placeholder="e.g. Jaipur"/></div>
+      <div class="aform-group"><label>State</label><input class="ainput" id="cityState" placeholder="e.g. Rajasthan"/></div>
+      <div class="aform-group"><label>Status</label>
+        <select class="ainput" id="cityStatus"><option value="active">Active</option><option value="coming_soon">Coming Soon</option></select>
+      </div>
+    </div>
+    <div class="amodal-footer">
+      <button class="abtn abtn-outline" onclick="closeModal('addCityModal')">Cancel</button>
+      <button class="abtn abtn-primary" onclick="addCity()"><i class="fa-solid fa-city"></i> Add City</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Banner Modal -->
+<div class="amodal-overlay" id="addBannerModal">
+  <div class="amodal">
+    <div class="amodal-header"><h3>Add Banner</h3><button onclick="closeModal('addBannerModal')"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="amodal-body">
+      <div class="aform-group"><label>Title</label><input class="ainput" id="bannerTitle" placeholder="Banner title"/></div>
+      <div class="aform-group"><label>Subtitle</label><input class="ainput" id="bannerSubtitle" placeholder="Short description"/></div>
+      <div class="aform-group"><label>CTA Link</label><input class="ainput" id="bannerLink" placeholder="https://..."/></div>
+      <div class="aform-group"><label>Background Color</label><input class="ainput" type="color" id="bannerColor" value="#2563eb"/></div>
+      <div class="aform-group"><label>Position</label>
+        <select class="ainput" id="bannerPosition"><option>Homepage Hero</option><option>Homepage Mid</option><option>Sidebar</option></select>
+      </div>
+    </div>
+    <div class="amodal-footer">
+      <button class="abtn abtn-outline" onclick="closeModal('addBannerModal')">Cancel</button>
+      <button class="abtn abtn-primary" onclick="addBanner()"><i class="fa-solid fa-image"></i> Add Banner</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="adminToast" class="admin-toast" style="display:none;"></div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

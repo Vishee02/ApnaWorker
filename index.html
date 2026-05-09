@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ApnaWorker — Hire Verified Local Professionals</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dark-mode">
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span class="logo-text">Apna<span class="gradient-text">Worker</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="freelancer.html" class="nav-link">Find Workers</a></li>
+        <li><a href="booking.html" class="nav-link">Bookings</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="chat.html" class="nav-link">Chat</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Theme">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>100% Verified Professionals</span>
+      </div>
+      <h1 class="hero-title">
+        Find Trusted <span class="gradient-text typed-text" id="typedText">Electricians</span>
+        <br/>Near You, <span class="gradient-text">Instantly.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Connect with verified local professionals — plumbers, electricians, developers, designers and more. 
+        Book in seconds, get results that last.
+      </p>
+
+      <!-- SEARCH BAR -->
+      <div class="search-container glass-card">
+        <div class="search-field">
+          <i class="fa-solid fa-briefcase search-icon"></i>
+          <input type="text" id="searchSkill" placeholder="What service do you need?" class="search-input"/>
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field">
+          <i class="fa-solid fa-location-dot search-icon"></i>
+          <input type="text" id="searchLocation" placeholder="Your city or area" class="search-input"/>
+        </div>
+        <button class="btn btn-primary search-btn" onclick="searchWorkers()">
+          <i class="fa-solid fa-magnifying-glass"></i> Search
+        </button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number gradient-text">12K+</span>
+          <span class="stat-label">Verified Workers</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number gradient-text">50K+</span>
+          <span class="stat-label">Jobs Completed</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number gradient-text">200+</span>
+          <span class="stat-label">Cities Covered</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number gradient-text">4.9★</span>
+          <span class="stat-label">Average Rating</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- CATEGORY SECTION -->
+  <section class="section categories-section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Services</span>
+        <h2 class="section-title">Browse by <span class="gradient-text">Category</span></h2>
+        <p class="section-subtitle">From home repairs to digital services — find any professional you need</p>
+      </div>
+      <div class="categories-grid" id="categoriesGrid">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Process</span>
+        <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card glass-card">
+          <div class="step-number gradient-text">01</div>
+          <div class="step-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>Search</h3>
+          <p>Search for the service you need in your area</p>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="step-card glass-card">
+          <div class="step-number gradient-text">02</div>
+          <div class="step-icon"><i class="fa-solid fa-user-check"></i></div>
+          <h3>Choose</h3>
+          <p>Compare verified profiles, ratings, and prices</p>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="step-card glass-card">
+          <div class="step-number gradient-text">03</div>
+          <div class="step-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <h3>Book</h3>
+          <p>Book instantly with your preferred time slot</p>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="step-card glass-card">
+          <div class="step-number gradient-text">04</div>
+          <div class="step-icon"><i class="fa-solid fa-star"></i></div>
+          <h3>Review</h3>
+          <p>Rate your experience and help the community</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREELANCER CARDS SECTION -->
+  <section class="section workers-section" id="workers">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Professionals</span>
+        <h2 class="section-title">Top Rated <span class="gradient-text">Workers</span></h2>
+        <p class="section-subtitle">Hand-picked, background-verified professionals ready to help</p>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="electrician">Electrician</button>
+        <button class="filter-btn" data-filter="plumber">Plumber</button>
+        <button class="filter-btn" data-filter="developer">Developer</button>
+        <button class="filter-btn" data-filter="designer">Designer</button>
+        <button class="filter-btn" data-filter="painter">Painter</button>
+      </div>
+      <div class="workers-grid" id="workersGrid">
+        <!-- Injected by JS -->
+      </div>
+      <div class="text-center" style="margin-top:3rem;">
+        <a href="freelancer.html" class="btn btn-outline btn-lg">
+          View All Professionals <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Reviews</span>
+        <h2 class="section-title">What Our <span class="gradient-text">Clients Say</span></h2>
+      </div>
+      <div class="testimonials-grid" id="testimonialsGrid">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <div class="cta-bg-particles" id="ctaParticles"></div>
+    <div class="container">
+      <div class="cta-content glass-card">
+        <h2 class="cta-title">Ready to <span class="gradient-text">Get Started?</span></h2>
+        <p class="cta-subtitle">Join thousands of satisfied clients and verified professionals on ApnaWorker</p>
+        <div class="cta-buttons">
+          <a href="register.html" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-rocket"></i> Hire a Professional
+          </a>
+          <a href="register.html?role=freelancer" class="btn btn-outline btn-lg">
+            <i class="fa-solid fa-briefcase"></i> Offer Your Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
+            <span class="logo-text">Apna<span class="gradient-text">Worker</span></span>
+          </a>
+          <p>Connecting verified local professionals with clients who need them — fast, reliable, and transparent.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="social-link"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="freelancer.html">Find Workers</a></li>
+            <li><a href="register.html?role=freelancer">Become a Pro</a></li>
+            <li><a href="booking.html">Bookings</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Electricians</a></li>
+            <li><a href="#">Plumbers</a></li>
+            <li><a href="#">Web Developers</a></li>
+            <li><a href="#">Designers</a></li>
+            <li><a href="#">Painters</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-developer">
+          <div class="dev-avatar">
+            <img src="images/vishesh.jpeg" alt="Vishesh Mani Tripathi"/>
+          </div>
+          <div class="dev-meta">
+            <p class="dev-name">Developed by <span class="gradient-text">Vishesh Mani Tripathi</span></p>
+            <p class="dev-contact"><i class="fa-solid fa-phone"></i> 9369004464</p>
+            <div class="dev-links">
+              <a href="https://github.com/Vishee02" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://www.linkedin.com/in/vishesh-mani-tripathi-4108b4273" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+        <p class="footer-copy">&copy; 2026 ApnaWorker. All rights reserved. Built with <span class="gradient-text">❤</span> in India.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/darkmode.js"></script>
+</body>
+</html>

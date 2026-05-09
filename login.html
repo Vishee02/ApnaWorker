@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — ApnaWorker</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dark-mode auth-page">
+
+  <canvas id="authCanvas"></canvas>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span class="logo-text">Apna<span class="gradient-text">Worker</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="dark-mode-toggle" id="darkModeToggle"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="auth-wrapper">
+    <div class="auth-card glass-card">
+      <div class="auth-header">
+        <div class="auth-icon-wrap">
+          <i class="fa-solid fa-bolt gradient-text"></i>
+        </div>
+        <h2>Welcome Back</h2>
+        <p>Sign in to your ApnaWorker account</p>
+      </div>
+
+      <div class="social-auth">
+        <button class="social-btn glass-card">
+          <i class="fa-brands fa-google"></i> Continue with Google
+        </button>
+        <button class="social-btn glass-card">
+          <i class="fa-brands fa-github"></i> Continue with GitHub
+        </button>
+      </div>
+
+      <div class="auth-divider"><span>or sign in with email</span></div>
+
+      <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-envelope input-icon"></i>
+            <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" required/>
+          </div>
+          <span class="form-error" id="emailError"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-lock input-icon"></i>
+            <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required/>
+            <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', this)">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+          <span class="form-error" id="passwordError"></span>
+        </div>
+        <div class="form-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="rememberMe"/> Remember me
+          </label>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+          <span id="loginBtnText">Sign In</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <div class="auth-footer-text">
+        Don't have an account? <a href="register.html" class="gradient-text">Create one free</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script>initAuthCanvas('authCanvas');</script>
+</body>
+</html>

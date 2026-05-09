@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Workers — ApnaWorker</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <link rel="stylesheet" href="css/profile.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dark-mode">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span class="logo-text">Apna<span class="gradient-text">Worker</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="freelancer.html" class="nav-link active">Find Workers</a></li>
+        <li><a href="booking.html" class="nav-link">Bookings</a></li>
+        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+        <li><a href="chat.html" class="nav-link">Chat</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="dark-mode-toggle" id="darkModeToggle"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">Find <span class="gradient-text">Professionals</span></h1>
+      <p class="page-subtitle">Browse verified local experts ready to help you</p>
+    </div>
+  </div>
+
+  <div class="workers-page container">
+    <!-- SIDEBAR FILTERS -->
+    <aside class="filter-sidebar glass-card">
+      <h3 class="filter-title"><i class="fa-solid fa-sliders"></i> Filters</h3>
+
+      <div class="filter-section">
+        <label class="filter-label">Search</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-magnifying-glass input-icon"></i>
+          <input type="text" id="sidebarSearch" class="form-input" placeholder="Name or skill..." oninput="applyFilters()"/>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">Category</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" value="electrician" class="cat-filter" onchange="applyFilters()"/> Electrician</label>
+          <label class="checkbox-label"><input type="checkbox" value="plumber" class="cat-filter" onchange="applyFilters()"/> Plumber</label>
+          <label class="checkbox-label"><input type="checkbox" value="developer" class="cat-filter" onchange="applyFilters()"/> Developer</label>
+          <label class="checkbox-label"><input type="checkbox" value="designer" class="cat-filter" onchange="applyFilters()"/> Designer</label>
+          <label class="checkbox-label"><input type="checkbox" value="painter" class="cat-filter" onchange="applyFilters()"/> Painter</label>
+          <label class="checkbox-label"><input type="checkbox" value="carpenter" class="cat-filter" onchange="applyFilters()"/> Carpenter</label>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">Minimum Rating</label>
+        <div class="rating-filter">
+          <input type="range" id="ratingFilter" min="1" max="5" step="0.5" value="1" oninput="updateRatingLabel(this); applyFilters()"/>
+          <span id="ratingLabel">1★ & above</span>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">Price Range (₹/hr)</label>
+        <div class="price-range">
+          <input type="number" id="minPrice" class="form-input" placeholder="Min" oninput="applyFilters()"/>
+          <span>—</span>
+          <input type="number" id="maxPrice" class="form-input" placeholder="Max" oninput="applyFilters()"/>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <label class="filter-label">Sort By</label>
+        <select id="sortBy" class="form-input form-select" onchange="applyFilters()">
+          <option value="rating">Top Rated</option>
+          <option value="price_low">Price: Low to High</option>
+          <option value="price_high">Price: High to Low</option>
+          <option value="jobs">Most Jobs</option>
+        </select>
+      </div>
+
+      <button class="btn btn-outline btn-full" onclick="resetFilters()">
+        <i class="fa-solid fa-rotate-left"></i> Reset Filters
+      </button>
+    </aside>
+
+    <!-- WORKERS LIST -->
+    <main class="workers-main">
+      <div class="results-header">
+        <span id="resultsCount" class="results-count">Showing 12 professionals</span>
+        <div class="view-toggle">
+          <button class="view-btn active" id="gridView" onclick="setView('grid', this)"><i class="fa-solid fa-grip"></i></button>
+          <button class="view-btn" id="listView" onclick="setView('list', this)"><i class="fa-solid fa-list"></i></button>
+        </div>
+      </div>
+      <div class="workers-grid" id="freelancerGrid">
+        <!-- JS injected -->
+      </div>
+    </main>
+  </div>
+
+  <!-- WORKER PROFILE MODAL -->
+  <div class="modal-overlay" id="profileModal" onclick="closeModal(event)">
+    <div class="modal-card glass-card" id="modalContent">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderFreelancerPage();
+    });
+  </script>
+</body>
+</html>

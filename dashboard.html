@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — ApnaWorker</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/navbar.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="dark-mode">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span class="logo-text">Apna<span class="gradient-text">Worker</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="freelancer.html" class="nav-link">Find Workers</a></li>
+        <li><a href="booking.html" class="nav-link">Bookings</a></li>
+        <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+        <li><a href="chat.html" class="nav-link">Chat</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="dark-mode-toggle" id="darkModeToggle"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-page">
+    <!-- SIDEBAR -->
+    <aside class="dashboard-sidebar glass-card">
+      <div class="dash-user-info">
+        <div class="dash-avatar gradient-bg">R</div>
+        <div>
+          <strong>Rahul Sharma</strong>
+          <span>Client Account</span>
+        </div>
+      </div>
+      <nav class="dash-nav">
+        <a href="#overview" class="dash-nav-item active" onclick="showDashSection('overview', this)">
+          <i class="fa-solid fa-chart-pie"></i> Overview
+        </a>
+        <a href="#bookings" class="dash-nav-item" onclick="showDashSection('bookings', this)">
+          <i class="fa-solid fa-calendar-check"></i> My Bookings
+        </a>
+        <a href="#saved" class="dash-nav-item" onclick="showDashSection('saved', this)">
+          <i class="fa-solid fa-bookmark"></i> Saved Workers
+        </a>
+        <a href="#reviews" class="dash-nav-item" onclick="showDashSection('reviews', this)">
+          <i class="fa-solid fa-star"></i> My Reviews
+        </a>
+        <a href="#profile" class="dash-nav-item" onclick="showDashSection('profile', this)">
+          <i class="fa-solid fa-user"></i> Profile Settings
+        </a>
+      </nav>
+      <a href="index.html" class="btn btn-outline btn-full" style="margin-top:auto;">
+        <i class="fa-solid fa-arrow-left"></i> Back to Home
+      </a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+      <!-- OVERVIEW SECTION -->
+      <section id="overview" class="dash-section active">
+        <h2 class="dash-section-title">Welcome back, <span class="gradient-text">Rahul 👋</span></h2>
+        <div class="dash-stats-grid">
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-icon" style="background:rgba(37,99,235,0.2);">
+              <i class="fa-solid fa-calendar-check" style="color:#2563eb;"></i>
+            </div>
+            <div>
+              <span class="dash-stat-value gradient-text">8</span>
+              <span class="dash-stat-label">Total Bookings</span>
+            </div>
+          </div>
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-icon" style="background:rgba(16,185,129,0.2);">
+              <i class="fa-solid fa-check-circle" style="color:#10b981;"></i>
+            </div>
+            <div>
+              <span class="dash-stat-value gradient-text">6</span>
+              <span class="dash-stat-label">Completed</span>
+            </div>
+          </div>
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-icon" style="background:rgba(245,158,11,0.2);">
+              <i class="fa-solid fa-clock" style="color:#f59e0b;"></i>
+            </div>
+            <div>
+              <span class="dash-stat-value gradient-text">2</span>
+              <span class="dash-stat-label">Upcoming</span>
+            </div>
+          </div>
+          <div class="dash-stat-card glass-card">
+            <div class="dash-stat-icon" style="background:rgba(239,68,68,0.2);">
+              <i class="fa-solid fa-indian-rupee-sign" style="color:#ef4444;"></i>
+            </div>
+            <div>
+              <span class="dash-stat-value gradient-text">₹12.4K</span>
+              <span class="dash-stat-label">Total Spent</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-recent">
+          <h3 class="dash-subsection-title">Recent Bookings</h3>
+          <div class="bookings-table glass-card">
+            <div class="table-header">
+              <span>Service</span><span>Professional</span><span>Date</span><span>Status</span><span>Amount</span>
+            </div>
+            <div class="table-row">
+              <span><i class="fa-solid fa-bolt"></i> Electrical Work</span>
+              <span>Rajesh Kumar</span>
+              <span>Dec 18, 2024</span>
+              <span class="status-badge completed">Completed</span>
+              <span>₹1,500</span>
+            </div>
+            <div class="table-row">
+              <span><i class="fa-solid fa-faucet"></i> Plumbing</span>
+              <span>Suresh Patel</span>
+              <span>Dec 20, 2024</span>
+              <span class="status-badge pending">Upcoming</span>
+              <span>₹800</span>
+            </div>
+            <div class="table-row">
+              <span><i class="fa-solid fa-code"></i> Web Dev</span>
+              <span>Priya Sharma</span>
+              <span>Dec 15, 2024</span>
+              <span class="status-badge completed">Completed</span>
+              <span>₹8,000</span>
+            </div>
+            <div class="table-row">
+              <span><i class="fa-solid fa-paintbrush"></i> Painting</span>
+              <span>Vikram Singh</span>
+              <span>Dec 22, 2024</span>
+              <span class="status-badge active">Active</span>
+              <span>₹2,200</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BOOKINGS SECTION -->
+      <section id="bookings" class="dash-section">
+        <h2 class="dash-section-title">My <span class="gradient-text">Bookings</span></h2>
+        <div class="booking-tabs">
+          <button class="filter-btn active">All</button>
+          <button class="filter-btn">Upcoming</button>
+          <button class="filter-btn">Active</button>
+          <button class="filter-btn">Completed</button>
+          <button class="filter-btn">Cancelled</button>
+        </div>
+        <div id="dashBookingsList" style="display:grid;gap:1rem;margin-top:1.5rem;">
+          <!-- JS injected -->
+        </div>
+      </section>
+
+      <!-- SAVED WORKERS SECTION -->
+      <section id="saved" class="dash-section">
+        <h2 class="dash-section-title">Saved <span class="gradient-text">Workers</span></h2>
+        <div class="workers-grid" id="savedWorkers" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+          <!-- JS injected -->
+        </div>
+      </section>
+
+      <!-- REVIEWS SECTION -->
+      <section id="reviews" class="dash-section">
+        <h2 class="dash-section-title">My <span class="gradient-text">Reviews</span></h2>
+        <div id="myReviewsList" style="display:grid;gap:1rem;"></div>
+      </section>
+
+      <!-- PROFILE SECTION -->
+      <section id="profile" class="dash-section">
+        <h2 class="dash-section-title">Profile <span class="gradient-text">Settings</span></h2>
+        <div class="profile-form glass-card">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-user input-icon"></i>
+                <input type="text" class="form-input" value="Rahul"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-user input-icon"></i>
+                <input type="text" class="form-input" value="Sharma"/>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input type="email" class="form-input" value="rahul@example.com"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-phone input-icon"></i>
+              <input type="tel" class="form-input" value="+91 98765 43210"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-city input-icon"></i>
+              <input type="text" class="form-input" value="Varanasi"/>
+            </div>
+          </div>
+          <button class="btn btn-primary">Save Changes <i class="fa-solid fa-check"></i></button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initDashboard();
+    });
+  </script>
+</body>
+</html>
